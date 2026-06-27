@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,700");
+/* Font loaded via <link> in HTML for non-render-blocking delivery */
 .solar_systm {
   transform-style: preserve-3d;
   pointer-events: none;
@@ -6,6 +6,8 @@
   position: absolute;
   left: 0;
   right: 0;
+  /* Promote each solar_systm layer for smooth 3D transitions */
+  will-change: transform;
 }
 
 * {
@@ -45,6 +47,10 @@ body .solar_systm .planet {
   background-size: 1140px 910px !important;
   top: auto;
   bottom: -920px;
+  /* GPU-promote planet elements to their own compositor layer */
+  will-change: transform, opacity;
+  /* Prevent sub-pixel layout thrashing */
+  transform: translateZ(0);
 }
 body .solar_systm .planet .moon {
   height: 200px;
@@ -56,7 +62,8 @@ body .solar_systm .planet .moon {
   color: white;
   text-transform: uppercase;
   opacity: 0;
-  transition: all 0.6s 0.2s;
+  transition: opacity 0.6s 0.2s, transform 0.6s 0.2s;
+  will-change: opacity, transform;
 }
 body .solar_systm .planet .moon h2 {
   font-weight: 100;
@@ -243,13 +250,13 @@ body label.menu h2 .pip {
   float: left;
   position: relative;
   top: 3px;
-  transition: all 0.3s;
+  transition: width 0.3s, margin-right 0.3s;
   margin-right: 0px;
 }
 body label.menu h3 {
   font-size: 8px;
   letter-spacing: 1px;
-  transition: all 0.3s;
+  transition: opacity 0.3s, color 0.3s;
   opacity: 0.3;
 }
 body label.menu:nth-of-type(1) {
@@ -293,18 +300,18 @@ body .read:checked + label::after {
   left: 0;
 }
 body .read:checked + label + label {
-  transition: all 0.3s 0.6s;
+  transition: opacity 0.3s 0.6s;
   opacity: 1;
 }
 body .read:not(:checked) + label + label {
-  transition: all 0.3s 0s;
+  transition: opacity 0.3s 0s;
   opacity: 0;
 }
 body label.close {
   position: absolute;
   right: 60px;
   opacity: 0;
-  transition: all 0.3s 0.4s;
+  transition: opacity 0.3s 0.4s;
   z-index: 3;
   top: 65px;
 }
@@ -314,7 +321,7 @@ body label.closeBig {
   left: 0;
   z-index: 3;
   height: 100vh;
-  transition: all 0.2s;
+  transition: width 0.2s, background 0.2s;
   z-index: 10;
   width: 0;
   background: rgba(56, 37, 99, 0.38);
@@ -367,26 +374,26 @@ body input[type=radio][name=planet].planet1:checked + label + div .solar_systm:n
 }
 body input[type=radio][name=planet].planet1:checked + label + div .solar_systm:nth-of-type(1) .planet_description {
   opacity: 1;
-  transition: all 0.6s 2.6s;
+  transition: opacity 0.6s 2.6s, transform 0.6s 2.6s;
 }
 body input[type=radio][name=planet].planet1:checked + label + div .solar_systm:nth-of-type(1) .planet_description h2,
 body input[type=radio][name=planet].planet1:checked + label + div .solar_systm:nth-of-type(1) .planet_description h1 {
   position: relative;
   top: 0px;
-  transition: all 0.5s 3s;
+  transition: opacity 0.5s 3s, top 0.5s 3s;
 }
 body input[type=radio][name=planet].planet1:checked + label + div .solar_systm:nth-of-type(1) .planet_description p,
 body input[type=radio][name=planet].planet1:checked + label + div .solar_systm:nth-of-type(1) .planet_description a {
-  transition: all 1s 3.5s, padding 0.3s 0s;
+  transition: opacity 1s 3.5s, padding 0.3s 0s;
   opacity: 1;
 }
 body input[type=radio][name=planet].planet1:checked + label + div .solar_systm:nth-of-type(1) .planet .moon {
   opacity: 1;
-  transition: all 1s 3.2s;
+  transition: opacity 1s 3.2s, transform 1s 3.2s;
 }
 body input[type=radio][name=planet].planet1:checked + label + div .solar_systm:nth-of-type(1) .planet .trajectory {
   opacity: 0.2;
-  transition: all 0.6s 2.9s;
+  transition: opacity 0.6s 2.9s;
 }
 body input[type=radio][name=planet].planet1:checked + label + div .solar_systm:nth-of-type(1) .planet .overlay {
   opacity: 1;
@@ -506,26 +513,26 @@ body input[type=radio][name=planet].planet2:checked + label + input + label + di
 }
 body input[type=radio][name=planet].planet2:checked + label + input + label + div .solar_systm:nth-of-type(2) .planet_description {
   opacity: 1;
-  transition: all 0.6s 2.6s;
+  transition: opacity 0.6s 2.6s, transform 0.6s 2.6s;
 }
 body input[type=radio][name=planet].planet2:checked + label + input + label + div .solar_systm:nth-of-type(2) .planet_description h2,
 body input[type=radio][name=planet].planet2:checked + label + input + label + div .solar_systm:nth-of-type(2) .planet_description h1 {
   position: relative;
   top: 0px;
-  transition: all 0.5s 3s;
+  transition: opacity 0.5s 3s, top 0.5s 3s;
 }
 body input[type=radio][name=planet].planet2:checked + label + input + label + div .solar_systm:nth-of-type(2) .planet_description p,
 body input[type=radio][name=planet].planet2:checked + label + input + label + div .solar_systm:nth-of-type(2) .planet_description a {
-  transition: all 1s 3.5s, padding 0.3s 0s;
+  transition: opacity 1s 3.5s, padding 0.3s 0s;
   opacity: 1;
 }
 body input[type=radio][name=planet].planet2:checked + label + input + label + div .solar_systm:nth-of-type(2) .planet .moon {
   opacity: 1;
-  transition: all 1s 3.2s;
+  transition: opacity 1s 3.2s, transform 1s 3.2s;
 }
 body input[type=radio][name=planet].planet2:checked + label + input + label + div .solar_systm:nth-of-type(2) .planet .trajectory {
   opacity: 0.2;
-  transition: all 0.6s 2.9s;
+  transition: opacity 0.6s 2.9s;
 }
 body input[type=radio][name=planet].planet2:checked + label + input + label + div .solar_systm:nth-of-type(2) .planet .overlay {
   opacity: 1;
@@ -648,26 +655,26 @@ body input[type=radio][name=planet].planet3:checked + label + input + label + in
 }
 body input[type=radio][name=planet].planet3:checked + label + input + label + input + label + div .solar_systm:nth-of-type(3) .planet_description {
   opacity: 1;
-  transition: all 0.6s 2.6s;
+  transition: opacity 0.6s 2.6s, transform 0.6s 2.6s;
 }
 body input[type=radio][name=planet].planet3:checked + label + input + label + input + label + div .solar_systm:nth-of-type(3) .planet_description h2,
 body input[type=radio][name=planet].planet3:checked + label + input + label + input + label + div .solar_systm:nth-of-type(3) .planet_description h1 {
   position: relative;
   top: 0px;
-  transition: all 0.5s 3s;
+  transition: opacity 0.5s 3s, top 0.5s 3s;
 }
 body input[type=radio][name=planet].planet3:checked + label + input + label + input + label + div .solar_systm:nth-of-type(3) .planet_description p,
 body input[type=radio][name=planet].planet3:checked + label + input + label + input + label + div .solar_systm:nth-of-type(3) .planet_description a {
-  transition: all 1s 3.5s, padding 0.3s 0s;
+  transition: opacity 1s 3.5s, padding 0.3s 0s;
   opacity: 1;
 }
 body input[type=radio][name=planet].planet3:checked + label + input + label + input + label + div .solar_systm:nth-of-type(3) .planet .moon {
   opacity: 1;
-  transition: all 1s 3.2s;
+  transition: opacity 1s 3.2s, transform 1s 3.2s;
 }
 body input[type=radio][name=planet].planet3:checked + label + input + label + input + label + div .solar_systm:nth-of-type(3) .planet .trajectory {
   opacity: 0.2;
-  transition: all 0.6s 2.9s;
+  transition: opacity 0.6s 2.9s;
 }
 body input[type=radio][name=planet].planet3:checked + label + input + label + input + label + div .solar_systm:nth-of-type(3) .planet .overlay {
   opacity: 1;
@@ -793,26 +800,26 @@ body input[type=radio][name=planet].planet4:checked + label + input + label + in
 }
 body input[type=radio][name=planet].planet4:checked + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(4) .planet_description {
   opacity: 1;
-  transition: all 0.6s 2.6s;
+  transition: opacity 0.6s 2.6s, transform 0.6s 2.6s;
 }
 body input[type=radio][name=planet].planet4:checked + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(4) .planet_description h2,
 body input[type=radio][name=planet].planet4:checked + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(4) .planet_description h1 {
   position: relative;
   top: 0px;
-  transition: all 0.5s 3s;
+  transition: opacity 0.5s 3s, top 0.5s 3s;
 }
 body input[type=radio][name=planet].planet4:checked + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(4) .planet_description p,
 body input[type=radio][name=planet].planet4:checked + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(4) .planet_description a {
-  transition: all 1s 3.5s, padding 0.3s 0s;
+  transition: opacity 1s 3.5s, padding 0.3s 0s;
   opacity: 1;
 }
 body input[type=radio][name=planet].planet4:checked + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(4) .planet .moon {
   opacity: 1;
-  transition: all 1s 3.2s;
+  transition: opacity 1s 3.2s, transform 1s 3.2s;
 }
 body input[type=radio][name=planet].planet4:checked + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(4) .planet .trajectory {
   opacity: 0.2;
-  transition: all 0.6s 2.9s;
+  transition: opacity 0.6s 2.9s;
 }
 body input[type=radio][name=planet].planet4:checked + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(4) .planet .overlay {
   opacity: 1;
@@ -941,26 +948,26 @@ body input[type=radio][name=planet].planet5:checked + label + input + label + in
 }
 body input[type=radio][name=planet].planet5:checked + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(5) .planet_description {
   opacity: 1;
-  transition: all 0.6s 2.6s;
+  transition: opacity 0.6s 2.6s, transform 0.6s 2.6s;
 }
 body input[type=radio][name=planet].planet5:checked + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(5) .planet_description h2,
 body input[type=radio][name=planet].planet5:checked + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(5) .planet_description h1 {
   position: relative;
   top: 0px;
-  transition: all 0.5s 3s;
+  transition: opacity 0.5s 3s, top 0.5s 3s;
 }
 body input[type=radio][name=planet].planet5:checked + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(5) .planet_description p,
 body input[type=radio][name=planet].planet5:checked + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(5) .planet_description a {
-  transition: all 1s 3.5s, padding 0.3s 0s;
+  transition: opacity 1s 3.5s, padding 0.3s 0s;
   opacity: 1;
 }
 body input[type=radio][name=planet].planet5:checked + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(5) .planet .moon {
   opacity: 1;
-  transition: all 1s 3.2s;
+  transition: opacity 1s 3.2s, transform 1s 3.2s;
 }
 body input[type=radio][name=planet].planet5:checked + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(5) .planet .trajectory {
   opacity: 0.2;
-  transition: all 0.6s 2.9s;
+  transition: opacity 0.6s 2.9s;
 }
 body input[type=radio][name=planet].planet5:checked + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(5) .planet .overlay {
   opacity: 1;
@@ -1092,26 +1099,26 @@ body input[type=radio][name=planet].planet6:checked + label + input + label + in
 }
 body input[type=radio][name=planet].planet6:checked + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(6) .planet_description {
   opacity: 1;
-  transition: all 0.6s 2.6s;
+  transition: opacity 0.6s 2.6s, transform 0.6s 2.6s;
 }
 body input[type=radio][name=planet].planet6:checked + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(6) .planet_description h2,
 body input[type=radio][name=planet].planet6:checked + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(6) .planet_description h1 {
   position: relative;
   top: 0px;
-  transition: all 0.5s 3s;
+  transition: opacity 0.5s 3s, top 0.5s 3s;
 }
 body input[type=radio][name=planet].planet6:checked + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(6) .planet_description p,
 body input[type=radio][name=planet].planet6:checked + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(6) .planet_description a {
-  transition: all 1s 3.5s, padding 0.3s 0s;
+  transition: opacity 1s 3.5s, padding 0.3s 0s;
   opacity: 1;
 }
 body input[type=radio][name=planet].planet6:checked + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(6) .planet .moon {
   opacity: 1;
-  transition: all 1s 3.2s;
+  transition: opacity 1s 3.2s, transform 1s 3.2s;
 }
 body input[type=radio][name=planet].planet6:checked + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(6) .planet .trajectory {
   opacity: 0.2;
-  transition: all 0.6s 2.9s;
+  transition: opacity 0.6s 2.9s;
 }
 body input[type=radio][name=planet].planet6:checked + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(6) .planet .overlay {
   opacity: 1;
@@ -1246,26 +1253,26 @@ body input[type=radio][name=planet].planet7:checked + label + input + label + in
 }
 body input[type=radio][name=planet].planet7:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(7) .planet_description {
   opacity: 1;
-  transition: all 0.6s 2.6s;
+  transition: opacity 0.6s 2.6s, transform 0.6s 2.6s;
 }
 body input[type=radio][name=planet].planet7:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(7) .planet_description h2,
 body input[type=radio][name=planet].planet7:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(7) .planet_description h1 {
   position: relative;
   top: 0px;
-  transition: all 0.5s 3s;
+  transition: opacity 0.5s 3s, top 0.5s 3s;
 }
 body input[type=radio][name=planet].planet7:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(7) .planet_description p,
 body input[type=radio][name=planet].planet7:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(7) .planet_description a {
-  transition: all 1s 3.5s, padding 0.3s 0s;
+  transition: opacity 1s 3.5s, padding 0.3s 0s;
   opacity: 1;
 }
 body input[type=radio][name=planet].planet7:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(7) .planet .moon {
   opacity: 1;
-  transition: all 1s 3.2s;
+  transition: opacity 1s 3.2s, transform 1s 3.2s;
 }
 body input[type=radio][name=planet].planet7:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(7) .planet .trajectory {
   opacity: 0.2;
-  transition: all 0.6s 2.9s;
+  transition: opacity 0.6s 2.9s;
 }
 body input[type=radio][name=planet].planet7:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(7) .planet .overlay {
   opacity: 1;
@@ -1403,26 +1410,26 @@ body input[type=radio][name=planet].planet8:checked + label + input + label + in
 }
 body input[type=radio][name=planet].planet8:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(8) .planet_description {
   opacity: 1;
-  transition: all 0.6s 2.6s;
+  transition: opacity 0.6s 2.6s, transform 0.6s 2.6s;
 }
 body input[type=radio][name=planet].planet8:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(8) .planet_description h2,
 body input[type=radio][name=planet].planet8:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(8) .planet_description h1 {
   position: relative;
   top: 0px;
-  transition: all 0.5s 3s;
+  transition: opacity 0.5s 3s, top 0.5s 3s;
 }
 body input[type=radio][name=planet].planet8:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(8) .planet_description p,
 body input[type=radio][name=planet].planet8:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(8) .planet_description a {
-  transition: all 1s 3.5s, padding 0.3s 0s;
+  transition: opacity 1s 3.5s, padding 0.3s 0s;
   opacity: 1;
 }
 body input[type=radio][name=planet].planet8:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(8) .planet .moon {
   opacity: 1;
-  transition: all 1s 3.2s;
+  transition: opacity 1s 3.2s, transform 1s 3.2s;
 }
 body input[type=radio][name=planet].planet8:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(8) .planet .trajectory {
   opacity: 0.2;
-  transition: all 0.6s 2.9s;
+  transition: opacity 0.6s 2.9s;
 }
 body input[type=radio][name=planet].planet8:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(8) .planet .overlay {
   opacity: 1;
@@ -1563,26 +1570,26 @@ body input[type=radio][name=planet].planet9:checked + label + input + label + in
 }
 body input[type=radio][name=planet].planet9:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(9) .planet_description {
   opacity: 1;
-  transition: all 0.6s 2.6s;
+  transition: opacity 0.6s 2.6s, transform 0.6s 2.6s;
 }
 body input[type=radio][name=planet].planet9:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(9) .planet_description h2,
 body input[type=radio][name=planet].planet9:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(9) .planet_description h1 {
   position: relative;
   top: 0px;
-  transition: all 0.5s 3s;
+  transition: opacity 0.5s 3s, top 0.5s 3s;
 }
 body input[type=radio][name=planet].planet9:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(9) .planet_description p,
 body input[type=radio][name=planet].planet9:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(9) .planet_description a {
-  transition: all 1s 3.5s, padding 0.3s 0s;
+  transition: opacity 1s 3.5s, padding 0.3s 0s;
   opacity: 1;
 }
 body input[type=radio][name=planet].planet9:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(9) .planet .moon {
   opacity: 1;
-  transition: all 1s 3.2s;
+  transition: opacity 1s 3.2s, transform 1s 3.2s;
 }
 body input[type=radio][name=planet].planet9:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(9) .planet .trajectory {
   opacity: 0.2;
-  transition: all 0.6s 2.9s;
+  transition: opacity 0.6s 2.9s;
 }
 body input[type=radio][name=planet].planet9:checked + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + input + label + div .solar_systm:nth-of-type(9) .planet .overlay {
   opacity: 1;
@@ -1656,7 +1663,7 @@ body .solar_systm:nth-of-type(1) .planet_description h1,
 body .solar_systm:nth-of-type(1) .planet_description h2 {
   position: relative;
   top: -330px;
-  transition: all 0.5s 0s;
+  transition: top 0.5s 0s, opacity 0.5s 0s;
 }
 body .solar_systm:nth-of-type(2) .planet {
   transform: translateZ(-2300px) translateY(0) rotatex(4deg) scalex(0.89);
@@ -1673,7 +1680,7 @@ body .solar_systm:nth-of-type(2) .planet_description h1,
 body .solar_systm:nth-of-type(2) .planet_description h2 {
   position: relative;
   top: -330px;
-  transition: all 0.5s 0s;
+  transition: top 0.5s 0s, opacity 0.5s 0s;
 }
 body .solar_systm:nth-of-type(3) .planet {
   transform: translateZ(-4600px) translateY(0) rotatex(4deg) scalex(0.89);
@@ -1690,7 +1697,7 @@ body .solar_systm:nth-of-type(3) .planet_description h1,
 body .solar_systm:nth-of-type(3) .planet_description h2 {
   position: relative;
   top: -330px;
-  transition: all 0.5s 0s;
+  transition: top 0.5s 0s, opacity 0.5s 0s;
 }
 body .solar_systm:nth-of-type(4) .planet {
   transform: translateZ(-6900px) translateY(0) rotatex(4deg) scalex(0.89);
@@ -1707,7 +1714,7 @@ body .solar_systm:nth-of-type(4) .planet_description h1,
 body .solar_systm:nth-of-type(4) .planet_description h2 {
   position: relative;
   top: -330px;
-  transition: all 0.5s 0s;
+  transition: top 0.5s 0s, opacity 0.5s 0s;
 }
 body .solar_systm:nth-of-type(5) .planet {
   transform: translateZ(-9200px) translateY(0) rotatex(4deg) scalex(0.89);
@@ -1724,7 +1731,7 @@ body .solar_systm:nth-of-type(5) .planet_description h1,
 body .solar_systm:nth-of-type(5) .planet_description h2 {
   position: relative;
   top: -330px;
-  transition: all 0.5s 0s;
+  transition: top 0.5s 0s, opacity 0.5s 0s;
 }
 body .solar_systm:nth-of-type(6) .planet {
   transform: translateZ(-11500px) translateY(0) rotatex(4deg) scalex(0.89);
@@ -1741,7 +1748,7 @@ body .solar_systm:nth-of-type(6) .planet_description h1,
 body .solar_systm:nth-of-type(6) .planet_description h2 {
   position: relative;
   top: -330px;
-  transition: all 0.5s 0s;
+  transition: top 0.5s 0s, opacity 0.5s 0s;
 }
 body .solar_systm:nth-of-type(7) .planet {
   transform: translateZ(-13800px) translateY(0) rotatex(4deg) scalex(0.89);
@@ -1758,7 +1765,7 @@ body .solar_systm:nth-of-type(7) .planet_description h1,
 body .solar_systm:nth-of-type(7) .planet_description h2 {
   position: relative;
   top: -330px;
-  transition: all 0.5s 0s;
+  transition: top 0.5s 0s, opacity 0.5s 0s;
 }
 body .solar_systm:nth-of-type(8) .planet {
   transform: translateZ(-16100px) translateY(0) rotatex(4deg) scalex(0.89);
@@ -1775,7 +1782,7 @@ body .solar_systm:nth-of-type(8) .planet_description h1,
 body .solar_systm:nth-of-type(8) .planet_description h2 {
   position: relative;
   top: -330px;
-  transition: all 0.5s 0s;
+  transition: top 0.5s 0s, opacity 0.5s 0s;
 }
 body .solar_systm:nth-of-type(9) .planet {
   transform: translateZ(-18400px) translateY(0) rotatex(4deg) scalex(0.89);
@@ -1792,7 +1799,7 @@ body .solar_systm:nth-of-type(9) .planet_description h1,
 body .solar_systm:nth-of-type(9) .planet_description h2 {
   position: relative;
   top: -330px;
-  transition: all 0.5s 0s;
+  transition: top 0.5s 0s, opacity 0.5s 0s;
 }
 body .solar_systm:nth-of-type(10) .planet {
   transform: translateZ(-20700px) translateY(0) rotatex(4deg) scalex(0.89);
@@ -1809,10 +1816,10 @@ body .solar_systm:nth-of-type(10) .planet_description h1,
 body .solar_systm:nth-of-type(10) .planet_description h2 {
   position: relative;
   top: -330px;
-  transition: all 0.5s 0s;
+  transition: top 0.5s 0s, opacity 0.5s 0s;
 }
 body .solar_systm .planet .trajectory {
-  transition: all 0.6s 0s;
+  transition: opacity 0.6s 0s, transform 0.6s 0s;
   opacity: 0;
 }
 body .solar_systm .planet.mercury {
@@ -2089,9 +2096,10 @@ body .solar_systm .planet_description {
   right: 0;
   color: white;
   font-weight: 100;
-  transition: all 0.4s 0s;
+  transition: opacity 0.4s 0s, transform 0.4s 0s;
   text-transform: uppercase;
   z-index: 1;
+  will-change: opacity;
 }
 body .solar_systm .planet_description.mercury a {
   color: #E8927C;
@@ -2180,7 +2188,7 @@ body .solar_systm .planet_description a {
   font-weight: 500;
   padding: 0 2px 5px 0px;
   border-bottom: 2px solid;
-  transition: all 0.2s;
+  transition: padding 0.2s, left 0.2s;
   position: relative;
   left: 0;
 }
@@ -2198,11 +2206,15 @@ body .panel {
   width: 300px;
   top: 0;
   height: 100vh;
-  transition: all 0.2s;
+  transition: right 0.2s;
   color: black;
   background: white;
   padding: 10px 60px 0px 60px;
-  overflow: scroll;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  /* Prevent panel from triggering paint on the main layer */
+  will-change: right;
+  contain: layout style;
 }
 body .panel body::-webkit-scrollbar {
   width: 1em;
