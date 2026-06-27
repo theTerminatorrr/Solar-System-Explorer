@@ -136,6 +136,59 @@ body .logo span {
   color: #f39041;
   display: block;
 }
+
+/* ── GitHub link – top-right corner ── */
+body .github-link {
+  position: fixed;
+  top: 32px;
+  right: 36px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: color 0.25s;
+}
+body .github-link:hover {
+  color: #ffffff;
+}
+body .github-icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* ── Wikipedia link – planet center card ── */
+body .solar_systm .planet_description .wiki-link {
+  display: inline-block;
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+  position: relative;
+  left: 0;
+}
+body .solar_systm .planet_description .wiki-link:hover {
+  color: rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+body .solar_systm .planet_description .wiki-link span {
+  letter-spacing: 0;
+  margin-left: 1px;
+}
 body label {
   cursor: pointer;
 }
